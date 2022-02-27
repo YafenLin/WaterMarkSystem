@@ -28,6 +28,7 @@ def getMainColor():
     })
     r = requests.post('https://api.weixin.qq.com/tcb/batchdownloadfile', requestData)
     app.logger.info('请求图片的返回：',r)
+    return make_succ_response(r.json())
 
 @app.route('/')
 def index():
