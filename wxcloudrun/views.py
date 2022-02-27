@@ -26,8 +26,8 @@ def getMainColor():
         ],
         'access_token': request.headers.get('x-wx-cloudbase-access-token')
     })
-    r = request.post('https://api.weixin.qq.com/tcb/batchdownloadfile', requestData)
-    print(r.json)
+    r = requests.post('https://api.weixin.qq.com/tcb/batchdownloadfile', requestData)
+    app.logger.info('请求图片的返回：',r)
 
 @app.route('/')
 def index():
