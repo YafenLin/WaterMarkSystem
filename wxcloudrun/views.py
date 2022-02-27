@@ -5,7 +5,7 @@ from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 
-@app.route('/getMainColor')
+@app.route('/getMainColor',methods=['GET'])
 def getMainColor():
     return make_succ_response('linyafen')
 
