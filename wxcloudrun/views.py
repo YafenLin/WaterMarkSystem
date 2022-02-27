@@ -16,15 +16,15 @@ def getMainColor():
         'env': 'prod-0g8xwb4l0adf87b4',
         'file_list': [
             {
-                'fileid': params.data.imgBase,
+                'fileid': params.imgBase,
                 'max_age': 7200
             },
             {
-                'fileid': params.data.QRCode,
+                'fileid': params.QRCode,
                 'max_age': 7200
             }
         ],
-        'access_token': params.headers['x-wx-cloudbase-access-token']
+        'access_token': request.headers.get('x-wx-cloudbase-access-token')
     })
     r = request.post('https://api.weixin.qq.com/tcb/batchdownloadfile', requestData)
     print(r.json)
