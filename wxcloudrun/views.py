@@ -4,10 +4,30 @@ from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
+import requests, json
+
 
 @app.route('/getMainColor',methods=['GET'])
 def getMainColor():
-    return make_succ_response(444)
+    # 获取请求体参数
+    params = request.get_json()
+    print(params)
+    requestData = json.dumps({
+        'env': 'prod-0g8xwb4l0adf87b4',
+        'file_list': [
+            {
+                'fileid': params.data.imgBase,
+                'max_age': 7200
+            },
+            {
+                'fileid': params.data.QRCode,
+                'max_age': 7200
+            }
+        ],
+        'access_token': params.headers['x-wx-cloudbase-access-token']
+    })
+    r = request.post('https://api.weixin.qq.com/tcb/batchdownloadfile', requestData)
+    print(r.json)
 
 @app.route('/')
 def index():
