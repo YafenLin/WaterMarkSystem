@@ -7,7 +7,7 @@ from wxcloudrun.response import make_succ_empty_response, make_succ_response, ma
 
 @app.route('/getMainColor',methods=['GET'])
 def getMainColor():
-    return make_succ_response('linyafen')
+    return make_succ_response(444)
 
 @app.route('/')
 def index():
