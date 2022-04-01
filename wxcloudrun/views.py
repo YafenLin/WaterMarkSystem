@@ -1,3 +1,4 @@
+import base64
 from datetime import datetime
 from flask import render_template, request
 from run import app
@@ -7,28 +8,12 @@ from wxcloudrun.response import make_succ_empty_response, make_succ_response, ma
 import requests, json
 
 
-@app.route('/getMainColor',methods=['GET'])
-def getMainColor():
-    # 获取请求体参数
-    params = request.get_json()
-    print(params)
-    requestData = json.dumps({
-        'env': 'prod-0g8xwb4l0adf87b4',
-        'file_list': [
-            {
-                'fileid': params.imgBase,
-                'max_age': 7200
-            },
-            {
-                'fileid': params.QRCode,
-                'max_age': 7200
-            }
-        ],
-        'access_token': request.headers.get('x-wx-cloudbase-access-token')
-    })
-    r = requests.post('https://api.weixin.qq.com/tcb/batchdownloadfile', requestData)
-    app.logger.info('请求图片的返回：',r)
-    return make_succ_response(r.json())
+@app.route('/uploadBaseImg',methods=['POST'])
+def uploadBaseImg():
+    team_image = base64.b64decode(request.form.get("image"))
+    with open("static/111111.png", "wb") as f:
+        f.write(team_image)
+    return make_succ_response('ok')
 
 @app.route('/')
 def index():
