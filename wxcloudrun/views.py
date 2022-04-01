@@ -12,7 +12,7 @@ import requests, json
 def uploadBaseImg():
     params = request.get_json()
     team_image = base64.b64decode(params['image'])
-    with open("static/111111.png", "wb") as f:
+    with open("lena.png", "wb") as f:
         f.write(team_image)
     return make_succ_response('ok')
 
