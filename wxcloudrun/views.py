@@ -14,7 +14,10 @@ def uploadBaseImg():
     team_image = base64.b64decode(params['image'])
     with open("lena.png", "wb") as f:
         f.write(team_image)
-    return make_succ_response('ok')
+    with open("lena.png","wb") as f:
+        img = base64.b64encode(f.read())
+        return make_succ_response(img)
+    return make_err_response('fail')
 
 @app.route('/')
 def index():
