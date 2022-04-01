@@ -10,7 +10,8 @@ import requests, json
 
 @app.route('/uploadBaseImg',methods=['POST'])
 def uploadBaseImg():
-    team_image = base64.b64decode(request.form.get("image"))
+    params = request.get_json()
+    team_image = base64.b64decode(params['image'])
     with open("static/111111.png", "wb") as f:
         f.write(team_image)
     return make_succ_response('ok')
